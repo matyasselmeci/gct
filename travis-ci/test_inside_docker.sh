@@ -28,11 +28,12 @@ set +x
 echo "**** TESTS COMPLETED *****"
 cd /gct
 grep '^FAIL:\|^PASS:\|^SKIP:' check.out
-if grep -q '^FAIL:' check.out; then
-    echo "**** `grep -c '^FAIL:' check.out` TESTS FAILED ****"
-    find . -wholename \*/test/test-suite.log | while read line; do
-        echo "=== $line ==="
-        cat "$line"
+count=`grep -c '^FAIL:' check.out` || :
+if [[ $count -ge 1 ]]; then
+    echo "**** $count TESTS FAILED ****"
+    find . -wholename \*/test/test-suite.log | while read logfile; do
+        echo "=== $logfile ==="
+        cat "$logfile"
         echo
     done
     exit 1

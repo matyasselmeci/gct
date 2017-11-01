@@ -1,12 +1,11 @@
 #!/bin/bash
 
 id
+env | sort
 
 cd /gct
 autoreconf -if
 ./configure
 make
 
-env | sort
-
-make -j1 check | tee check.out
+make check | tee check.out
