@@ -25,7 +25,7 @@ static globus_bool_t                    globus_l_closed = GLOBUS_FALSE;
 
 static globus_bool_t                    globus_l_timeout = GLOBUS_TRUE;
 
-#define USEC_THRESHHOLD  50000
+#define USEC_THRESHHOLD  500000
 
 static globus_bool_t
 result_is_timeout(
