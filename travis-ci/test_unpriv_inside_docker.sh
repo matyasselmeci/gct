@@ -5,7 +5,7 @@ env | sort
 
 cd /gct
 autoreconf -if
-./configure
+./configure --enable-myproxy
 make
 
 make check | tee check.out
