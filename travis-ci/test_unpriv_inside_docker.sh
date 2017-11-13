@@ -16,6 +16,8 @@ if [[ $COMPONENTS == *udt* ]]; then
 fi
 if [[ $COMPONENTS == *gram5* ]]; then
     args+=(--enable-gram5-{server,lsf,sge,slurm,condor,pbs,auditing})
+else
+    args+=(--disable-gram5)
 fi
 ./configure "${args[@]}"
 make
