@@ -1,11 +1,23 @@
 #!/bin/bash
 
+COMPONENTS=$1
+
 id
 env | sort
 
 cd /gct
 autoreconf -if
-./configure --prefix=/gct --enable-myproxy --enable-udt --enable-gram5-{server,lsf,sge,slurm,condor,pbs,auditing}
+args=(--prefix=/gct)
+if [[ $COMPONENTS == *myproxy* ]]; then
+    args+=(--enable-myproxy)
+fi
+if [[ $COMPONENTS == *udt* ]]; then
+    args+=(--enable-udt)
+fi
+if [[ $COMPONENTS == *gram5* ]]; then
+    args+=(--enable-gram5-{server,lsf,sge,slurm,condor,pbs,auditing})
+fi
+./configure "${args[@]}"
 make
 make install
 
