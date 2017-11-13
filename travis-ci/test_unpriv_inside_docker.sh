@@ -5,7 +5,7 @@ env | sort
 
 cd /gct
 autoreconf -if
-./configure --prefix=/gct --enable-myproxy --enable-udt
+./configure --prefix=/gct --enable-myproxy --enable-udt --enable-gram5-{server,lsf,sge,slurm,condor,pbs,auditing}
 make
 make install
 
