@@ -27,6 +27,7 @@ set +e
 [[ $COMPONENTS == *ssh* ]]     && packages+=(curl)
 [[ $COMPONENTS == *udt* ]]     && packages+=(glib2 xz)
 [[ $COMPONENTS == *myproxy* ]] && packages+=(which)
+[[ $COMPONENTS == *gram* ]]    && packages+=('perl(Pod::Html)')
 set -e
 
 yum -y -d1 install "${packages[@]}"
