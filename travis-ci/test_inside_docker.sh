@@ -34,7 +34,7 @@ yum -y -d1 install "${packages[@]}"
 
 getent passwd builduser > /dev/null || useradd builduser
 chown -R builduser: /gct
-su builduser -c "/bin/bash -xe /gct/travis-ci/test_unpriv_inside_docker.sh $COMPONENTS"
+su builduser -c "/bin/bash -xe /gct/travis-ci/test_unpriv_inside_docker.sh $IMAGE $COMPONENTS"
 
 set +x
 echo "**** TESTS COMPLETED *****"
