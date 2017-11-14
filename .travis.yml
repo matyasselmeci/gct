@@ -5,12 +5,12 @@ env:
     - IMAGE=centos:centos7 COMPONENTS=udt,myproxy,ssh
     - IMAGE=fedora:25      COMPONENTS=udt,myproxy,ssh
     - IMAGE=fedora:26      COMPONENTS=udt,myproxy,ssh
-    - IMAGE=fedora:27      COMPONENTS=udt,myproxy,ssh
+#    - IMAGE=fedora:27      COMPONENTS=udt,myproxy,ssh
     - IMAGE=centos:centos6 COMPONENTS=gram5
     - IMAGE=centos:centos7 COMPONENTS=gram5
     - IMAGE=fedora:25      COMPONENTS=gram5
     - IMAGE=fedora:26      COMPONENTS=gram5
-    - IMAGE=fedora:27      COMPONENTS=gram5
+#    - IMAGE=fedora:27      COMPONENTS=gram5
 
 services:
     - docker
