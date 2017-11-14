@@ -22,7 +22,7 @@ fi
 packages=(gcc gcc-c++ make autoconf automake libtool patch \
           libtool-ltdl-devel openssl openssl-devel git \
           'perl(Test::More)' 'perl(File::Spec)' 'perl(URI)' \
-          time)
+          file)
 
 set +e
 [[ $COMPONENTS == *ssh* ]]     && packages+=(curl)
