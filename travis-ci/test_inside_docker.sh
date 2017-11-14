@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OS_VERSION=$1
+IMAGE=$1
 COMPONENTS=$2
 
 
@@ -10,7 +10,11 @@ set -xe
 yum clean all
 
 # First, install all the needed packages.
-rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-${OS_VERSION}.noarch.rpm
+if [[ $IMAGE == centos* ]]; then
+    # "centos:centos7" -> "7"
+    OS_VERSION=${IMAGE#centos:centos}
+    rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-${OS_VERSION}.noarch.rpm
+fi
 
 # Broken mirror?
 echo "exclude=mirror.beyondhosting.net" >> /etc/yum/pluginconf.d/fastestmirror.conf
