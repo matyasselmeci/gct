@@ -14,10 +14,10 @@ if [[ $IMAGE == centos* ]]; then
     # "centos:centos7" -> "7"
     OS_VERSION=${IMAGE#centos:centos}
     rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-${OS_VERSION}.noarch.rpm
-fi
 
-# Broken mirror?
-echo "exclude=mirror.beyondhosting.net" >> /etc/yum/pluginconf.d/fastestmirror.conf
+    # Broken mirror?
+    echo "exclude=mirror.beyondhosting.net" >> /etc/yum/pluginconf.d/fastestmirror.conf
+fi
 
 packages=(gcc gcc-c++ make autoconf automake libtool patch \
           libtool-ltdl-devel openssl openssl-devel git \
