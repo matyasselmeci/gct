@@ -24,11 +24,11 @@ fi
 [[ $IMAGE      == *fedora* ]]  && args+=(LIBS='-ldl')
 set -e
 
-autoreconf -if
-./configure "${args[@]}"
-make
-make install
+time autoreconf -if
+time ./configure "${args[@]}"
+time make -j
+time make -j install
 
 export PATH=/gct/bin:$PATH LD_LIBRARY_PATH=/gct/lib:$LD_LIBRARY_PATH
 
-make check | tee check.out
+time make -j check | tee check.out
