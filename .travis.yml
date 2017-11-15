@@ -1,19 +1,31 @@
-sudo: required
-env:
-    matrix:
-    - OS_VERSION=6 COMPONENTS=udt,myproxy,ssh
-    - OS_VERSION=7 COMPONENTS=udt,myproxy,ssh
-    - OS_VERSION=6 COMPONENTS=gram5
-    - OS_VERSION=7 COMPONENTS=gram5
+language: cpp
 
-services:
-    - docker
+git:
+    depth: 3
 
-before_install:
-    - sudo apt-get update
-    - sleep 5
-    - sudo docker pull centos:centos${OS_VERSION}
+addons:
+    apt:
+        packages:
+        - gcc
+        - g++
+        - make
+        - autoconf
+        - automake
+        - libtool
+        - patch
+        - libltdl-dev
+        - openssl
+        - libssl-dev
+        - git
+        - liburi-perl
+
+install: true
+
+before_script:
+- rm -f prep-gsissh gsi_openssh.gt6.diff
+- autoreconf -if
+- ./configure --disable-gsi-openssh --disable-gram5
 
 script:
-- travis-ci/setup_tests.sh
+- make -j  &&  make -j check
 
