@@ -1,4 +1,9 @@
-#!/bin/bash
+#!/bin/bash -xe
+
+if [[ $COMPILE_RESULT -ne 0 ]]; then
+    echo "***** COMPILE FAILED, NOT RUNNING TESTS *****"
+    exit $COMPILE_RESULT
+fi
 
 make -j check  |  tee check.out
 echo "**** TESTS COMPLETED *****"

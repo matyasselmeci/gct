@@ -34,5 +34,6 @@ before_script:
 #  ^ I need the eval to do the brace expansion for $CONFARGS
 
 script:
-- make -j  &&  travis-ci/run_tests.sh
+- export COMPILE_RESULT=0; make -j || COMPILE_RESULT=$?; [[ $COMPILE_RESULT -eq 0 ]]
+- travis-ci/run_tests.sh
 
