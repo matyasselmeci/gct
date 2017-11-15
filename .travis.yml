@@ -3,6 +3,11 @@ language: cpp
 git:
     depth: 3
 
+env:
+    matrix:
+    - SSH=false CONFARGS="--disable-gsi-openssh --enable-gram5-{server,lsf,sge,slurm,condor,pbs,auditing}"
+    - SSH=true CONFARGS="--disable-gram5 --enable-myproxy --enable-udt"
+
 addons:
     apt:
         packages:
@@ -22,10 +27,11 @@ addons:
 install: true
 
 before_script:
-- rm -f prep-gsissh gsi_openssh.gt6.diff
+- $SSH || rm -f prep-gsissh gsi_openssh.gt6.diff
 - chmod +x travis-ci/run_tests.sh
 - autoreconf -if
-- ./configure --disable-gsi-openssh --disable-gram5 --enable-myproxy --enable-udt
+- eval ./configure --prefix=`pwd` --enable-silent-rules $CONFARGS
+#  ^ I need the eval to do the brace expansion for $CONFARGS
 
 script:
 - make -j  &&  travis-ci/run_tests.sh
