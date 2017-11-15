@@ -2,6 +2,7 @@
 
 IMAGE=$1
 COMPONENTS=$2
+TARGET=$3
 
 
 set -xe
@@ -35,7 +36,7 @@ yum -y -d1 install "${packages[@]}"
 
 getent passwd builduser > /dev/null || useradd builduser
 chown -R builduser: /gct
-su builduser -c "/bin/bash -xe /gct/travis-ci/test_unpriv_inside_docker.sh $IMAGE $COMPONENTS"
+su builduser -c "/bin/bash -xe /gct/travis-ci/test_unpriv_inside_docker.sh $IMAGE $COMPONENTS $TARGET"
 
 set +x
 echo "**** TESTS COMPLETED *****"

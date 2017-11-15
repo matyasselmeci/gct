@@ -2,6 +2,7 @@
 
 IMAGE=$1
 COMPONENTS=$2
+TARGET=$3
 
 id
 env | sort
@@ -29,11 +30,7 @@ time autoreconf -if
 echo '================================================================================'
 time ./configure "${args[@]}"
 echo '================================================================================'
-time make -j
-echo '================================================================================'
-time make -j install
-
-export PATH=/gct/bin:$PATH LD_LIBRARY_PATH=/gct/lib:$LD_LIBRARY_PATH
+time make -j $TARGET
 
 echo '================================================================================'
-time make -j check | tee check.out
+time make -j $TARGET-check | tee check.out

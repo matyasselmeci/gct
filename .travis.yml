@@ -1,13 +1,73 @@
 sudo: required
 env:
     matrix:
-    - IMAGE=centos:centos6 COMPONENTS=udt,myproxy,ssh
-    - IMAGE=centos:centos7 COMPONENTS=udt,myproxy,ssh
-    - IMAGE=fedora:25      COMPONENTS=udt,myproxy,ssh
-    - IMAGE=fedora:26      COMPONENTS=udt,myproxy,ssh
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_authz
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_authz_callout_error
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_callout
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_common
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_ftp_client
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_ftp_control
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gass_cache
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gass_cache_program
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gass_copy
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gass_server_ez
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gass_transfer
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gatekeeper
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gfork
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_audit
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_client
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_client_tools
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_job_manager
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_job_manager_callout_error
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_job_manager_condor
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_job_manager_fork
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_job_manager_lsf
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_job_manager_pbs
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_job_manager_scripts
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_job_manager_sge
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_job_manager_slurm
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_gram_protocol
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gridftp_server
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gridftp_server_control
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gridmap_callout
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gridmap_callout_error
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gridmap_eppn_callout
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gridmap_verify_myproxy_callout
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gsi_callback
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gsi_cert_utils
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gsi_credential
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gsi_openssl_error
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gsi_proxy_core
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gsi_proxy_ssl
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gsi_sysconfig
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gss_assist
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gssapi_error
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_gssapi_gsi
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_io
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_net_manager
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_openssl_module
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_proxy_utils
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_rsl
+    - IMAGE=centos:centos6 COMPONENTS=gram5 TARGET=globus_scheduler_event_generator
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_simple_ca
+    - IMAGE=centos:centos6 COMPONENTS= TARGET=globus_usage
+    - IMAGE=centos:centos6 COMPONENTS=udt TARGET=globus_xio
+    - IMAGE=centos:centos6 COMPONENTS=udt TARGET=globus_xio_gridftp_driver
+    - IMAGE=centos:centos6 COMPONENTS=udt TARGET=globus_xio_gridftp_multicast
+    - IMAGE=centos:centos6 COMPONENTS=udt TARGET=globus_xio_gsi_driver
+    - IMAGE=centos:centos6 COMPONENTS=udt TARGET=globus_xio_pipe_driver
+    - IMAGE=centos:centos6 COMPONENTS=udt TARGET=globus_xio_popen_driver
+    - IMAGE=centos:centos6 COMPONENTS=udt TARGET=globus_xio_rate_driver
+    - IMAGE=centos:centos6 COMPONENTS=udt TARGET=globus_xio_udt_driver
+    - IMAGE=centos:centos6 COMPONENTS=udt TARGET=globus_xioperf
+    - IMAGE=centos:centos6 COMPONENTS=ssh TARGET=gsi-openssh
+    - IMAGE=centos:centos6 COMPONENTS=myproxy TARGET=myproxy
+#    - IMAGE=centos:centos7 COMPONENTS=udt,myproxy,ssh
+#    - IMAGE=fedora:25      COMPONENTS=udt,myproxy,ssh
+#    - IMAGE=fedora:26      COMPONENTS=udt,myproxy,ssh
 #    - IMAGE=fedora:27      COMPONENTS=udt,myproxy,ssh
-    - IMAGE=centos:centos6 COMPONENTS=gram5
-    - IMAGE=centos:centos7 COMPONENTS=gram5
+#    - IMAGE=centos:centos6 COMPONENTS=gram5
+#    - IMAGE=centos:centos7 COMPONENTS=gram5
 #    - IMAGE=fedora:25      COMPONENTS=gram5
 #    - IMAGE=fedora:26      COMPONENTS=gram5
 #   The following gram tests failed for fedora:
