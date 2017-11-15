@@ -6,7 +6,7 @@ git:
 env:
     matrix:
     - SSH=false CONFARGS="--disable-gsi-openssh --enable-gram5-{server,lsf,sge,slurm,condor,pbs,auditing}"
-    - SSH=true CONFARGS="--disable-gram5 --enable-myproxy --enable-udt"
+#    - SSH=true CONFARGS="--disable-gram5 --enable-myproxy --enable-udt"
 
 addons:
     apt:
