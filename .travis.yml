@@ -23,9 +23,10 @@ install: true
 
 before_script:
 - rm -f prep-gsissh gsi_openssh.gt6.diff
+- chmod +x travis-ci/run_tests.sh
 - autoreconf -if
 - ./configure --disable-gsi-openssh --disable-gram5
 
 script:
-- make -j  &&  make -j check
+- make -j  &&  travis-ci/run_tests.sh
 
