@@ -25,7 +25,7 @@ before_script:
 - rm -f prep-gsissh gsi_openssh.gt6.diff
 - chmod +x travis-ci/run_tests.sh
 - autoreconf -if
-- ./configure --disable-gsi-openssh --disable-gram5
+- ./configure --disable-gsi-openssh --disable-gram5 --enable-myproxy --enable-udt
 
 script:
 - make -j  &&  travis-ci/run_tests.sh
