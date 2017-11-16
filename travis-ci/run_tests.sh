@@ -11,7 +11,7 @@ catfile () {
     echo
 }
 
-make globus_gram_job_manager-check  |  tee check.out
+make -j check  |  tee check.out
 echo "**** TESTS COMPLETED *****"
 grep '^FAIL:\|^PASS:\|^SKIP:\|^ERROR:' check.out
 count=`grep -c '^FAIL:\|^ERROR:' check.out` || :

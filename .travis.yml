@@ -36,6 +36,6 @@ before_script:
 #  ^ I need the eval to do the brace expansion for $CONFARGS
 
 script:
-- export COMPILE_RESULT=0; make -j globus_gatekeeper globus_gram_job_manager || COMPILE_RESULT=$?; [[ $COMPILE_RESULT -eq 0 ]]
+- export COMPILE_RESULT=0; make -j || COMPILE_RESULT=$?; [[ $COMPILE_RESULT -eq 0 ]]
 - travis-ci/run_tests.sh
 
