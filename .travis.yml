@@ -30,7 +30,7 @@ install: true
 before_script:
 - $SSH || rm -f prep-gsissh gsi_openssh.gt6.diff
 - chmod +x travis-ci/run_tests.sh
-- autoreconf -if
+- autoreconf -i
 - eval ./configure --prefix=`pwd` --enable-silent-rules --enable-python $CONFARGS
 #  ^ I need the eval to do the brace expansion for $CONFARGS
 
