@@ -28,6 +28,7 @@ addons:
 install: true
 
 before_script:
+- hostname -f && ping -c 5 `hostname -f`
 - $SSH || rm -f prep-gsissh gsi_openssh.gt6.diff
 - chmod +x travis-ci/run_tests.sh
 - autoreconf -i
