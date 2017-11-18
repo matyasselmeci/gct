@@ -1,14 +1,14 @@
 sudo: required
 env:
   global:
-  - secure: ZCNp91PNznlrLdQ8WxFmC3mdTvv4KVZPvlr8Ju5b08TiTSXg5jDZvl5qHc7FDmqkgvGgcIXq3bqeZTH7xEMF6yX/m4tWhpuzxxZWy7Mvavv/wFyMd1Iq3c8Ekn3Hy1R32+GIHkc0uCWreDC9Pwf88VpEWfBDJv9xG8pUHlaNo65FvnB62174yX75XLyJnOlBxRfCZAD4JQyORvzofwzCtVe7TSL0GKhHeUcTTsIQD4401mmukLV0GBHEyEh+jotbk9bTQ+GLQD93VWt8aCJvklIO0eht1GaVozonI1y7VuoNoSlTdXuYMr31aiX58yffFE1ZBzCrePJjzun45pHpqYMY8xiImg0jTlUETKbb5DnW5TZ79YE5Uf4itLwabicUQ1hfWCCJ7pxB62GAG3Bpr6mY4INp69eKpF1wL6ZeYKQJX/EilYmxjNrMZXdn/uoDZPa1Fw0wam1AgyZ62vmthdXcERJkUk/eiyUOxLI4zCWlHYrAPJL0R24j0M0YkQZRPOASQz1W2kK3u4rQxAER4mS7nw9tKVrTz8ZCQfcTqNmvQHsgrn8q8MQq9LgFz44vsIAh+reavj6NBZnQ+mN+LwzTnJlj4FUtVd1L5HgEcr2ushPtw2c56tMgxn9vDD0l3gq9u2zieRGmJ1sI/Oo0k42FvpQxgnI6vKqC4pyxVUM=
   matrix:
   - IMAGE=centos:centos6 COMPONENTS=udt,myproxy,ssh
 services:
 - docker
 before_install:
-- sudo apt-get update
-- sleep 5
-- sudo docker pull ${IMAGE}
+- openssl aes-256-cbc -K $encrypted_2cca008ad2c8_key -iv $encrypted_2cca008ad2c8_iv -in magicfile.txt.enc -out magicfile.txt -d
+#- sudo apt-get update
+#- sleep 5
+#- sudo docker pull ${IMAGE}
 script:
-- echo "the first letter of the magic word is ${MAGICWORD:0:1}"
+- echo magic file contents are && cat magicfile.txt
