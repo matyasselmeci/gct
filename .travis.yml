@@ -1,30 +1,14 @@
 sudo: required
 env:
-    matrix:
-    - IMAGE=centos:centos6 COMPONENTS=udt,myproxy,ssh
-    - IMAGE=centos:centos7 COMPONENTS=udt,myproxy,ssh
-#   Fedora builds are implemented but are disabled until we decide we
-#   need them; Travis limits our number of concurrent jobs so we don't
-#   want more than are necessary.
-#    - IMAGE=fedora:25      COMPONENTS=udt,myproxy,ssh
-#    - IMAGE=fedora:26      COMPONENTS=udt,myproxy,ssh
-#    - IMAGE=fedora:27      COMPONENTS=udt,myproxy,ssh
-    - IMAGE=centos:centos6 COMPONENTS=gram5
-    - IMAGE=centos:centos7 COMPONENTS=gram5
-#   The following gram tests failed for all fedora versions:
-#       nonblocking-register-test.pl, register-callback-test.pl, register-test.pl
-#    - IMAGE=fedora:25      COMPONENTS=gram5
-#    - IMAGE=fedora:26      COMPONENTS=gram5
-#    - IMAGE=fedora:27      COMPONENTS=gram5
-
+  global:
+  matrix:
+  - IMAGE=centos:centos6 COMPONENTS=udt,myproxy,ssh
 services:
-    - docker
-
+- docker
 before_install:
-    - sudo apt-get update
-    - sleep 5
-    - sudo docker pull ${IMAGE}
-
+- openssl aes-256-cbc -K $encrypted_2cca008ad2c8_key -iv $encrypted_2cca008ad2c8_iv -in magicfile.txt.enc -out magicfile.txt -d
+#- sudo apt-get update
+#- sleep 5
+#- sudo docker pull ${IMAGE}
 script:
-- travis-ci/setup_tests.sh
-
+- echo magic file contents are && cat magicfile.txt
