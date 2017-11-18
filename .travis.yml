@@ -1,33 +1,14 @@
 sudo: required
 env:
-    global:
-    - secure: "rSWNz6vKHQVnHdwCuUyN2tzv0u8/4nOCYhh1vOtfyRhoJQvvARnkoctydxdJrxkPOflTDJ0bY+0SFiJZC/l5cKcSSZMiyl7Fl/PDEJDKzroam0P5EpL3p+WPqJ8YIgh6o6EJckJya7IisorgkzT4z6czOjFN562AcAd3UrzGm6HdsjnlGd15WCPTEQNJSxT5b5WNAc4OZ7Fu3OVyCY00BjuENecwDPEl9BuqOKhT1VAy0Ah4GVQViCq11pOx1Jzf5sGG9YqSPq1Wi9rm1Br2xYxoFmJaVRokmVlpBuElUicNkUjeL3e9pVD2VDClKWclhAxf0LcJedHdr7H/zj+H7cM83kVgjc5aS/3VcSIY3+yJZZmqysWi/tUwFnK444gsrCH78I7ncb9xVEd+vDL/RLyvb50nyLGWc0XNUW31n1nv3omsidFIPIkiQFQsy1ET6LUJzI4VFsy7brpmJQhO7fgrNF/aHwfJruR5EmqeSWePFCg/b6QyOqHYLefh2MhY1yL/bDkqSATA58lLF2geRA9UilZONxx0ON8IKS3msh9kHyWnKvut4BTJS2x1adV95fr266avoa6CQxkpSaYhZTmSkuzE1vnXEQr5drvVMHR9t1RUl2v+P3w+mrXIbDpjGNOnNTxEWpDS8oSP8LsstHMOQ6RYPDI4mUvAQ9Mk31o="
-    matrix:
-    - IMAGE=centos:centos6 COMPONENTS=udt,myproxy,ssh
-#    - IMAGE=centos:centos7 COMPONENTS=udt,myproxy,ssh
-#   Fedora builds are implemented but are disabled until we decide we
-#   need them; Travis limits our number of concurrent jobs so we don't
-#   want more than are necessary.
-#    - IMAGE=fedora:25      COMPONENTS=udt,myproxy,ssh
-#    - IMAGE=fedora:26      COMPONENTS=udt,myproxy,ssh
-#    - IMAGE=fedora:27      COMPONENTS=udt,myproxy,ssh
-#    - IMAGE=centos:centos6 COMPONENTS=gram5
-#    - IMAGE=centos:centos7 COMPONENTS=gram5
-#   The following gram tests failed for all fedora versions:
-#       nonblocking-register-test.pl, register-callback-test.pl, register-test.pl
-#    - IMAGE=fedora:25      COMPONENTS=gram5
-#    - IMAGE=fedora:26      COMPONENTS=gram5
-#    - IMAGE=fedora:27      COMPONENTS=gram5
-
+  global:
+  - secure: ZCNp91PNznlrLdQ8WxFmC3mdTvv4KVZPvlr8Ju5b08TiTSXg5jDZvl5qHc7FDmqkgvGgcIXq3bqeZTH7xEMF6yX/m4tWhpuzxxZWy7Mvavv/wFyMd1Iq3c8Ekn3Hy1R32+GIHkc0uCWreDC9Pwf88VpEWfBDJv9xG8pUHlaNo65FvnB62174yX75XLyJnOlBxRfCZAD4JQyORvzofwzCtVe7TSL0GKhHeUcTTsIQD4401mmukLV0GBHEyEh+jotbk9bTQ+GLQD93VWt8aCJvklIO0eht1GaVozonI1y7VuoNoSlTdXuYMr31aiX58yffFE1ZBzCrePJjzun45pHpqYMY8xiImg0jTlUETKbb5DnW5TZ79YE5Uf4itLwabicUQ1hfWCCJ7pxB62GAG3Bpr6mY4INp69eKpF1wL6ZeYKQJX/EilYmxjNrMZXdn/uoDZPa1Fw0wam1AgyZ62vmthdXcERJkUk/eiyUOxLI4zCWlHYrAPJL0R24j0M0YkQZRPOASQz1W2kK3u4rQxAER4mS7nw9tKVrTz8ZCQfcTqNmvQHsgrn8q8MQq9LgFz44vsIAh+reavj6NBZnQ+mN+LwzTnJlj4FUtVd1L5HgEcr2ushPtw2c56tMgxn9vDD0l3gq9u2zieRGmJ1sI/Oo0k42FvpQxgnI6vKqC4pyxVUM=
+  matrix:
+  - IMAGE=centos:centos6 COMPONENTS=udt,myproxy,ssh
 services:
-    - docker
-
+- docker
 before_install:
-    - sudo apt-get update
-    - sleep 5
-    - sudo docker pull ${IMAGE}
-
+- sudo apt-get update
+- sleep 5
+- sudo docker pull ${IMAGE}
 script:
-- echo the magic word is \"$MAGICWORD\"
-#- travis-ci/setup_tests.sh
-
+- echo "the first letter of the magic word is ${MAGICWORD:0:1}"
