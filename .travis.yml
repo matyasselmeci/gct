@@ -1,49 +1,63 @@
-sudo: required
-env:
-    matrix:
-    - IMAGE=centos:centos6 TASK=tests COMPONENTS=udt,myproxy,ssh
-    - IMAGE=centos:centos7 TASK=tests COMPONENTS=udt,myproxy,ssh
-#   Fedora builds are implemented but are disabled until we decide we
-#   need them; Travis limits our number of concurrent jobs so we don't
-#   want more than are necessary.
-#    - IMAGE=fedora:26     TASK=tests COMPONENTS=udt,myproxy,ssh
-#    - IMAGE=fedora:27     TASK=tests COMPONENTS=udt,myproxy,ssh
-    - IMAGE=centos:centos6 TASK=tests COMPONENTS=gram5
-    - IMAGE=centos:centos7 TASK=tests COMPONENTS=gram5
-#   The following gram tests failed for all fedora versions:
-#       nonblocking-register-test.pl, register-callback-test.pl, register-test.pl
-#    - IMAGE=fedora:26      TASK=tests COMPONENTS=gram5
-#    - IMAGE=fedora:27      TASK=tests COMPONENTS=gram5
-#   The 'rpms' task does not run the unit tests (%check sections in RPMs)
-#   (except on centos 6, where disabling them is not possible),
-#   because they are already covered in the 'tests' task
-    - IMAGE=centos:centos6 TASK=rpms COMPONENTS=udt,myproxy,gram
-    - IMAGE=centos:centos7 TASK=rpms COMPONENTS=udt,myproxy,gram
-#   Fedora builds are implemented but are disabled until we decide we
-#   need them; Travis limits our number of concurrent jobs so we don't
-#   want more than are necessary.
-#    - IMAGE=fedora:26 TASK=rpms COMPONENTS=udt,myproxy,gram
-#    - IMAGE=fedora:27 TASK=rpms COMPONENTS=udt,myproxy,gram
+jobs:
+    include:
+        - stage: test
+          sudo: required
+          env:
+              matrix:
+#              - IMAGE=centos:centos6 TASK=tests COMPONENTS=udt,myproxy,ssh
+#              - IMAGE=centos:centos7 TASK=tests COMPONENTS=udt,myproxy,ssh
+#          #   Fedora builds are implemented but are disabled until we decide we
+#          #   need them; Travis limits our number of concurrent jobs so we don't
+#          #   want more than are necessary.
+#          #    - IMAGE=fedora:26     TASK=tests COMPONENTS=udt,myproxy,ssh
+#          #    - IMAGE=fedora:27     TASK=tests COMPONENTS=udt,myproxy,ssh
+#              - IMAGE=centos:centos6 TASK=tests COMPONENTS=gram5
+              - IMAGE=centos:centos7 TASK=tests COMPONENTS=gram5
+          #   The following gram tests failed for all fedora versions:
+          #       nonblocking-register-test.pl, register-callback-test.pl, register-test.pl
+          #    - IMAGE=fedora:26      TASK=tests COMPONENTS=gram5
+          #    - IMAGE=fedora:27      TASK=tests COMPONENTS=gram5
+          services:
+              - docker
 
+          before_install:
+              - sudo apt-get update
+              - sleep 5
+              - sudo docker pull ${IMAGE}
 
-services:
-    - docker
+          script:
+          - travis-ci/setup_tasks.sh
+        - stage: deploy
+          sudo: required
+          env:
+              matrix:
+#              - IMAGE=centos:centos6 TASK=tarballs COMPONENTS=udt,myproxy,gram
+              - IMAGE=centos:centos7 TASK=tarballs COMPONENTS=udt,myproxy,gram
+#              - IMAGE=centos:centos6 TASK=rpms COMPONENTS=udt,myproxy,gram
+#              - IMAGE=centos:centos7 TASK=rpms COMPONENTS=udt,myproxy,gram
+          #   Fedora builds are implemented but are disabled until we decide we
+          #   need them; Travis limits our number of concurrent jobs so we don't
+          #   want more than are necessary.
+          #    - IMAGE=fedora:26 TASK=rpms COMPONENTS=udt,myproxy,gram
+          #    - IMAGE=fedora:27 TASK=rpms COMPONENTS=udt,myproxy,gram
+          services:
+              - docker
 
-before_install:
-    - sudo apt-get update
-    - sleep 5
-    - sudo docker pull ${IMAGE}
+          before_install:
+              - sudo apt-get update
+              - sleep 5
+              - sudo docker pull ${IMAGE}
 
-script:
-- travis-ci/setup_tasks.sh
-deploy:
-    skip_cleanup: true
-    file_glob: true
-    provider: releases
-    api_key:
-        secure: ndqiULdDgGzxuFQmqDmgC6OmtXKLIowqOTJRPSoLCMBIPPbZf68bTcEjbWdwqnTKz9V/YyigWkQO55M/FH5ZzG8Y/olK3NObr/GebGkyCOEDdM4LHL1rt/1kmxENpFZidVO9bxMbkj+cgaJKU9pJ6VJ7jbXYpP6hj2imVm2KQZIAOvynGYFiSleZmgnmqMJw7yRXxaGOtXyHwV8mc17MPVM2dnMUXPEta7RIRJzLy/gInxHnZzQwZ4EDIDhUTxgeeqMVV6AInQJzsg7xUJsgv7IEvYm3bfqZJz5NkYh1izABDJBNDwJac8osaicllhVmLjwr9k2QSLCchyIiR/BzB0ciKqsxBzo6fpF03e1kkiqIxMdLWHLOiWV092OJLjqdrUZReLlnpYf45Uvwv0gQuX9sYAgR9xLunxmyTjXr5WUkqtIPSA8OchSuvbNOIHB9BqJ+rt4Ejt54ZYNtUUdHhqaB3q7PJSdUnbOesoaVqQYgPo6rDuh3wR16kahkhPAslkuTTbYw2b5ZUapaN1fiZpMQfqGdWvaNiIU6Esata05ANoKnu/QORSfZkTydIYEPtROGpDNkC94nTRcfWcxTOySft6cXjB5OyAelnaV6mq6h+lgz4NBNnIOh1yIMenjpgu118p2NmYgZejpf+DtmKpm6RpmJFkcW0AKwe9qcjDk=
-    file: package-output/*.tar.gz
-#    file: packaging/rpmbuild/SRPMS/*.rpm
-#    file: packaging/rpmbuild/RPMS/noarch/*.rpm
-#    file: packaging/rpmbuild/RPMS/x86_64/*.rpm
+          script:
+          - travis-ci/setup_tasks.sh
+          deploy:
+              skip_cleanup: true
+              file_glob: true
+              provider: releases
+              api_key:
+                  secure: ndqiULdDgGzxuFQmqDmgC6OmtXKLIowqOTJRPSoLCMBIPPbZf68bTcEjbWdwqnTKz9V/YyigWkQO55M/FH5ZzG8Y/olK3NObr/GebGkyCOEDdM4LHL1rt/1kmxENpFZidVO9bxMbkj+cgaJKU9pJ6VJ7jbXYpP6hj2imVm2KQZIAOvynGYFiSleZmgnmqMJw7yRXxaGOtXyHwV8mc17MPVM2dnMUXPEta7RIRJzLy/gInxHnZzQwZ4EDIDhUTxgeeqMVV6AInQJzsg7xUJsgv7IEvYm3bfqZJz5NkYh1izABDJBNDwJac8osaicllhVmLjwr9k2QSLCchyIiR/BzB0ciKqsxBzo6fpF03e1kkiqIxMdLWHLOiWV092OJLjqdrUZReLlnpYf45Uvwv0gQuX9sYAgR9xLunxmyTjXr5WUkqtIPSA8OchSuvbNOIHB9BqJ+rt4Ejt54ZYNtUUdHhqaB3q7PJSdUnbOesoaVqQYgPo6rDuh3wR16kahkhPAslkuTTbYw2b5ZUapaN1fiZpMQfqGdWvaNiIU6Esata05ANoKnu/QORSfZkTydIYEPtROGpDNkC94nTRcfWcxTOySft6cXjB5OyAelnaV6mq6h+lgz4NBNnIOh1yIMenjpgu118p2NmYgZejpf+DtmKpm6RpmJFkcW0AKwe9qcjDk=
+              file: package-output/*.tar.gz
+          #    file: packaging/rpmbuild/SRPMS/*.rpm
+          #    file: packaging/rpmbuild/RPMS/noarch/*.rpm
+          #    file: packaging/rpmbuild/RPMS/x86_64/*.rpm
 
