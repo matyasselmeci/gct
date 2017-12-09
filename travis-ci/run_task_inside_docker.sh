@@ -4,6 +4,7 @@ IMAGE=$1
 TASK=$2
 COMPONENTS=$3
 
+[[ $TASK == noop ]] && exit 0
 
 set -xe
 

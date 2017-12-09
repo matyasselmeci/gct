@@ -11,7 +11,7 @@ jobs:
 #          #    - IMAGE=fedora:26     TASK=tests COMPONENTS=udt,myproxy,ssh
 #          #    - IMAGE=fedora:27     TASK=tests COMPONENTS=udt,myproxy,ssh
 #              - IMAGE=centos:centos6 TASK=tests COMPONENTS=gram5
-              - IMAGE=centos:centos7 TASK=tests COMPONENTS=gram5
+              - IMAGE=centos:centos7 TASK=noop COMPONENTS=gram5
           #   The following gram tests failed for all fedora versions:
           #       nonblocking-register-test.pl, register-callback-test.pl, register-test.pl
           #    - IMAGE=fedora:26      TASK=tests COMPONENTS=gram5
@@ -29,7 +29,6 @@ jobs:
         - stage: deploy
           sudo: required
           env:
-              matrix:
 #              - IMAGE=centos:centos6 TASK=tarballs COMPONENTS=udt,myproxy,gram
               - IMAGE=centos:centos7 TASK=tarballs COMPONENTS=udt,myproxy,gram
 #              - IMAGE=centos:centos6 TASK=rpms COMPONENTS=udt,myproxy,gram
