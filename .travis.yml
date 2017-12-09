@@ -3,7 +3,6 @@ jobs:
         - stage: test
           sudo: required
           env:
-              matrix:
 #              - IMAGE=centos:centos6 TASK=tests COMPONENTS=udt,myproxy,ssh
 #              - IMAGE=centos:centos7 TASK=tests COMPONENTS=udt,myproxy,ssh
 #          #   Fedora builds are implemented but are disabled until we decide we
